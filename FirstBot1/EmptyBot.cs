@@ -49,9 +49,9 @@ namespace FirstBot1
             //var UserWrited = turnContext.Activity.Text;// lo que el usuario escribe
             //await turnContext.SendActivityAsync($"Usuario: {UserWrited}",cancellationToken:cancellationToken);
             await Dialog.RunAsync(
-                turnContext,
-                ConversationState.CreateProperty<DialogState>(nameof(DialogState)),
-                cancellationToken);
+                turnContext,// contexto
+                ConversationState.CreateProperty<DialogState>(nameof(DialogState)),// estado del dialogo
+               cancellationToken:cancellationToken);
         }
     }
 }

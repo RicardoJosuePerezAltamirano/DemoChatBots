@@ -45,9 +45,9 @@ namespace FirstBot1
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddSingleton<RootDialog>();
+            services.AddSingleton<RootDialog>();// registramos dialogo
             services.AddSingleton<ILuisService, LuisService>();
-            services.AddTransient<IBot, EmptyBot<RootDialog>>();
+            services.AddTransient<IBot, EmptyBot<RootDialog>>();// pasamos dialogo principal 
             //services.AddScoped();
         }
 
