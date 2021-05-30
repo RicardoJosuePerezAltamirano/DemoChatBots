@@ -29,13 +29,15 @@ namespace FirstBot1
         // preguntas cual es la diferencia entre recurso de creacion y recurso de preduccion de LUIS?
         public void ConfigureServices(IServiceCollection services)
         {
+            //NUMERO 1
             var storage = new AzureBlobStorage(
                 Configuration.GetSection("Storage").Value,
                 Configuration.GetSection("StorageContainer").Value);
+            //-----estado de usuario
             var userState = new UserState(storage);
 
             services.AddSingleton(userState);
-
+            //-----estado de conversacion 
             var ConversationState = new ConversationState(storage);
             services.AddSingleton(ConversationState);
 
@@ -44,6 +46,7 @@ namespace FirstBot1
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
+            //NUMERO 8 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddSingleton<RootDialog>();// registramos dialogo
             services.AddSingleton<ILuisService, LuisService>();

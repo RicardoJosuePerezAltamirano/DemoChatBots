@@ -12,6 +12,7 @@ namespace FirstBot1.Dialogs
 {
     public class RootDialog:ComponentDialog
     {
+        //NUMERO 7 CREAR EL DIALOGO PRINCIPAL
         // aqui se incluyen todos los dialogos que se van a utilizar 
         private readonly ILuisService LuisService;// para invocar al servicio LUIS
         //dialogo principal 
@@ -65,7 +66,7 @@ namespace FirstBot1.Dialogs
                     await IntentVerOpciones(stepContext, luisResult, cancellationToken);
                     break;
                 case "Comprar":
-                    // AQUI RETORNAMOS POR QUE AL TRABAJAR CON DIALOGOS EXTERNOS Y ESTOS DEVUELVEN UNA ACTIVIDAD
+                    // AQUI RETORNAMOS POR QUE AL TRABAJAR CON DIALOGOS EXTERNOS Y ESTOS DEVUELVEN UNA ACTIVIDAD NUMERO 10 crear otro dialogo 
                     return await IntentComprar(stepContext, luisResult, cancellationToken);
                     break;
 
@@ -78,10 +79,11 @@ namespace FirstBot1.Dialogs
 
         private async Task<DialogTurnResult> IntentComprar(WaterfallStepContext stepContext, RecognizerResult luisResult, CancellationToken cancellationToken)
         {
+            //NUMERO 10 CREAMOS UN NUEVO DIALOGO
             // usamos el nuevo dialogo creado ANTES SE DEBE AGREGAR EL DIALOGO AL DIALOGO ROOT
             return await stepContext.BeginDialogAsync(nameof(CellPhoneBuy.CellPhoneBuyDialog), cancellationToken: cancellationToken);
         }
-
+        //  NUMERO 9
         private async Task IntentVerOpciones(WaterfallStepContext stepContext, RecognizerResult luisResult, CancellationToken cancellationToken)
         {
             await stepContext.Context.SendActivityAsync("aqui tengo mis opciones ", cancellationToken:cancellationToken);
@@ -97,7 +99,7 @@ namespace FirstBot1.Dialogs
         private async  Task IntentSaludar(WaterfallStepContext stepContext, RecognizerResult luisResult, CancellationToken cancellationToken)
         {
             //si el bot detecta que esta saludando voy a responder con un saludo 
-            await stepContext.Context.SendActivityAsync("Hola que gusto verte", cancellationToken: cancellationToken);
+            await stepContext.Context.SendActivityAsync("Hola como estas ", cancellationToken: cancellationToken);
         }
 
         private async Task IntentDespedir(WaterfallStepContext stepContext, RecognizerResult luisResult, CancellationToken cancellationToken)

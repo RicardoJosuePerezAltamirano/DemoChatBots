@@ -10,17 +10,19 @@ using System.Threading.Tasks;
 
 namespace FirstBot1
 {
-    public class EmptyBot<T> : ActivityHandler where T:Dialog
+    public class EmptyBot<T> : ActivityHandler where T:Dialog// NUMERO 5 recibir un Dialog
     {
+        
         private readonly BotState UserState;
         private readonly BotState ConversationState;
         private readonly Dialog Dialog;
-
-        public EmptyBot(UserState _userState, ConversationState _ConversationState,T dialog)
+        // NUMERO 2
+        // injectamos los estados del bot 
+        public EmptyBot(UserState _userState, ConversationState _ConversationState,T dialog)// NUMERO 5 recibir un Dialog
         {
             UserState = _userState;
             ConversationState = _ConversationState;
-            Dialog = dialog;
+            Dialog = dialog; // NUMERO 5 recibir un Dialog
         }
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
@@ -33,6 +35,7 @@ namespace FirstBot1
             }
         }
         // captura actividades del boot y del usuario
+        //NUMERO 3
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default)
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
@@ -41,17 +44,21 @@ namespace FirstBot1
 
         }
         // captura las actividades del usuario
+        // NUMERO 4
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             // se manda lo que escribe el usuario
-
+            // este metodo sirve como echo 
             //await base.OnMessageActivityAsync(turnContext, cancellationToken);
+            //------------DEMO
             //var UserWrited = turnContext.Activity.Text;// lo que el usuario escribe
-            //await turnContext.SendActivityAsync($"Usuario: {UserWrited}",cancellationToken:cancellationToken);
+            //await turnContext.SendActivityAsync($"Usuario: {UserWrited}", cancellationToken: cancellationToken);
+
+            //--NUMERO 6 AHORA REDIRECCIONAMOS AL DIALOGO
             await Dialog.RunAsync(
                 turnContext,// contexto
                 ConversationState.CreateProperty<DialogState>(nameof(DialogState)),// estado del dialogo
-               cancellationToken:cancellationToken);
+               cancellationToken: cancellationToken);
         }
     }
 }
